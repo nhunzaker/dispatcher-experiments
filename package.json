@@ -1,0 +1,21 @@
+{
+  "name": "fluxed",
+  "version": "0.0.0",
+  "description": "Fluxy stuff",
+  "main": "dispatcher.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "flux"
+  ],
+  "author": "Nate Hunzaker",
+  "license": "MIT",
+  "dependencies": {
+    "envify": "^1.2.1",
+    "es6-promise": "^1.0.0",
+    "react": "^0.10.0",
+    "rsvp": "^3.0.9",
+    "superagent": "^0.18.0"
+  }
+}

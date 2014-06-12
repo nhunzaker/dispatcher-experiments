@@ -1,0 +1,7 @@
+{
+	"headers" : "head",
+	"create"  : "post",
+	"read"    : "get",
+	"update"  : "put",
+	"destroy" : "del"
+}

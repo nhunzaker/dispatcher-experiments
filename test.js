@@ -1,27 +1,45 @@
-var Dispatcher = require('./dispatcher');
-var Store = require('./store');
+require('colors');
 
-var dispatcher = new Dispatcher();
+require('node-jsx').install({
+	harmony: true,
+	extension: '.jsx'
+});
 
-['url', 'path', 'os'].forEach(function(module) {
-	var model   = new Store(module.toUpperCase(), 'http://nodejs.org/api/' + module + '.json')
-	model.parse = function(data) { return data.modules; };
+var express = require('express');
+var app = express();
+var routes  = require('./routes');
+var dispatcher = require('./dispatcher')
 
-	dispatcher.register('LOAD', model, 'read');
-}, {});
+app.set('view engine', 'ejs');
 
-var server = require('http').createServer(function(req, res) {
-	res.setHeader('Content-Type', 'text/html');
+require('./stores/os');
+require('./stores/path');
+require('./stores/url');
 
-	dispatcher.dispatch('LOAD').then(function(data) {
-		res.end(
-			'<!DOCTYPE html><head><meta charset="utf8"/></head><body>' +
-			'<p>Inspect the console for <code>__flux_cache</code></p>' +
-			'<script>__flux_cache = ' + JSON.stringify(data) + ';</script></body></html>'
-		);
-	}).catch(function(err) {
-		res.end(err);
-	});
-}).listen(1337, function() {
+var React  = require('react');
+var Layout = require('./views/layout.jsx')
+
+app.use(function(req, res, next) {
+	console.log(req.method.grey, req.url.blue);
+	next();
+});
+
+app.get('*', function(req, res) {
+	var props = routes.resolve(req.url);
+
+	if (!props.handler) return res.send(404);
+
+	props.handler().then(function(data) {
+		res.render('layout', {
+			app : React.renderComponentToString(Layout(data)),
+			location : props,
+			seed : data
+		});
+	}).catch(function(error) {
+		res.send(500, error);
+	})
+})
+
+app.listen(1337, function() {
 	console.log('Server is listening on port %s', 1337);
 });

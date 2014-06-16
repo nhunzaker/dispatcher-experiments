@@ -19,7 +19,7 @@ require('./stores/url')
 var React  = require('react')
 var Layout = require('./views/layout.jsx')
 
-app.use(express.static(__dirname + '/assets/'));
+app.use(express.static(__dirname + '/assets/'))
 
 app.use(function(req, res, next) {
 	console.log(req.method.grey, req.url.blue)
@@ -45,5 +45,5 @@ app.get('*', function(req, res) {
 })
 
 app.listen(1337, function() {
-	console.log('Server is listening on port %s', 1337);
+	console.log('Server is listening on port %s', 1337)
 })

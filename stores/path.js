@@ -1,12 +1,12 @@
-var Store = require('../lib/store');
-var Path = new Store('PATH', 'http://nodejs.org/api/path.json');
+var Store = require('../lib/store')
+var dispatcher = require('../dispatcher')
 
-var dispatcher = require('../dispatcher');
+var Path = new Store('PATH', '/data/path.json')
 
 Path.parse = function(data) {
-	return data.modules;
-};
+	return data.modules
+}
 
-dispatcher.register('PATH_READ', Path, 'read');
+dispatcher.register('PATH_READ', Path, 'read')
 
-module.exports = Path;
+module.exports = Path

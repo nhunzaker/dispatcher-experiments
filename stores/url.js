@@ -1,12 +1,12 @@
-var Store      = require('../lib/store');
-var dispatcher = require('../dispatcher');
+var Store = require('../lib/store')
+var dispatcher = require('../dispatcher')
 
-var URL = new Store('URL', 'http://nodejs.org/api/url.json');
+var URL = new Store('URL', '/data/url.json')
 
 URL.parse = function(data) {
-	return data.modules;
+	return data.modules
 };
 
-dispatcher.register('URL_READ', URL, 'read');
+dispatcher.register('URL_READ', URL, 'read')
 
-module.exports = URL;
+module.exports = URL

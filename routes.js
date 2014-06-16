@@ -1,16 +1,21 @@
-var Router      = require("./lib/router");
-var router      = new Router();
+/**
+ * @name Router
+ * @desc The router takes a given HTTP request and determines the
+ *       appropriate action to take.
+ */
 
-var Home = require('./actions/home');
-var Path = require('./actions/path');
-var URL  = require('./actions/url');
-var OS   = require('./actions/os');
+var Router = require("./lib/router")
+
+var router = new Router()
 
 router.match(function(map) {
-	map('').to(Home.index);
-	map('os').to(OS.index);
-	map('path').to(Path.index);
-	map('url').to(URL.index);
-});
+	map('/').to([ 'URL_READ', 'OS_READ', 'PATH_READ' ])
 
-module.exports = router;
+	map('os').to('OS_READ')
+
+	map('path').to('PATH_READ')
+
+	map('url').to('URL_READ')
+})
+
+module.exports = router

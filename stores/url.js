@@ -1,7 +1,10 @@
 var Store = require('../lib/store')
 var dispatcher = require('../dispatcher')
 
-var URL = new Store('URL', '/data/url.json')
+var URL = new Store({
+	id: 'URL',
+	url: '/data/url.json'
+})
 
 URL.parse = function(data) {
 	return data.modules

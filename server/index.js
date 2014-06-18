@@ -12,18 +12,19 @@ server.get('*', function(req, res) {
 			params    : response.params
 		})
 
+		console.log(response.data)
+
 		res.render('layout', {
-			app     : '', //React.renderComponentToString(component),
+			app     : React.renderComponentToString(component),
 			seed    : response.data || {}
 		})
-
 	}).catch(function(error) {
-		console.error('ERROR'.red, error)
+		console.error('ERROR'.red, req.url.magenta, "-", error)
 
 		if ('status' in error) {
 			res.send(error.status)
 		} else {
-			res.send(500, error)
+			res.error(error)
 		}
 	})
 })

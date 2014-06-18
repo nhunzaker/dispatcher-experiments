@@ -6,5 +6,5 @@ module.exports = Router({
 	'path' : require('./actions/path').index,
 	'url'  : require('./actions/url').index,
 	'404'  : require('./actions/errors').error404,
-	'500'  : require('./actions/errors').error404
+	'500'  : require('./actions/errors').error500
 })

@@ -10,10 +10,7 @@ module.exports = {
 	},
 
 	error500: function(error) {
-		console.error(error)
-
 		return {
-
 			data      : {},
 			component : require('../views/errors/500.jsx')
 		}

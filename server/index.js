@@ -1,12 +1,12 @@
 var server = require('./setup')()
 var config = require('../config')
-var routes = require('../actions/routes')
+var router = require('../router')
 var React  = require('react')
 var App    = require('../views/app.jsx')
 
 server.get('*', function(req, res) {
 
-	routes.request(req.url).then(function(response) {
+	router.dispatch(req.url).then(function(response) {
 		var component = App({
 			component : response.component,
 			params    : response.params

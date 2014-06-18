@@ -1,4 +1,4 @@
-var routes     = require('./actions/routes')
+var router     = require('./router')
 var history    = require('./actions/history')
 var dispatcher = require('./dispatcher')
 
@@ -9,7 +9,7 @@ var Browser = {
 	id: 'BROWSER',
 
 	resolvePath: function (url) {
-		return routes.request(url).then(function(response) {
+		return router.dispatch(url).then(function(response) {
 			React.renderComponent(App({
 				component : response.component,
 				params    : response.params

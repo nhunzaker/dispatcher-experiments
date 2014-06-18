@@ -26,8 +26,7 @@ module.exports = React.createClass({
 	},
 
 	_onClick: function(e) {
-		e.preventDefault()
-		console.log(e.currentTarget.href)
 		HistoryActions.push(e.currentTarget.href)
+		e.preventDefault()
 	}
 })
